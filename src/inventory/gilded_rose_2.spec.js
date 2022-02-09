@@ -1,4 +1,4 @@
-import { Item, updateQuality } from './gilded_rose';
+import { Item, updateQuality } from './gilded_rose_2';
 
 describe('`updateQuality`', () => {
   it('deprecates the sell in by one for a Haunted Shoe', () => {
