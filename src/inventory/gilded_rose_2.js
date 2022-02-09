@@ -35,6 +35,9 @@ export function updateQuality(items) {
       goods.name != "Backstage passes to a TAFKAL80ETC concert"
     ) {
       goods.quality = decreaseQuality(goods.quality);
+      if (goods.sell_in < 0) {
+        goods.quality = decreaseQuality(goods.quality);
+      }
     }
     //if IS Brie or BS Passes
     if (
@@ -57,7 +60,7 @@ export function updateQuality(items) {
           goods.name != "Backstage passes to a TAFKAL80ETC concert" &&
           goods.name != "Aged Brie"
         ) {
-          goods.quality = decreaseQuality(goods.quality);
+          // goods.quality = decreaseQuality(goods.quality);
         } else {
           // if IS BS passes
           goods.quality = goods.quality - goods.quality;
