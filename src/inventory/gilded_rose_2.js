@@ -24,42 +24,43 @@ export function Item(name, sell_in, quality) {
 export function updateQuality(items) {
   //use human words!!
   for (var i = 0; i < items.length; i++) {
-    if (items[i].name == "Sulfuras, Hand of Ragnaros") {
+    const goods = items[i];
+    if (goods.name == "Sulfuras, Hand of Ragnaros") {
       continue;
     }
-    items[i].sell_in = items[i].sell_in - 1;
+    goods.sell_in = goods.sell_in - 1;
     //if NOT Brie or BS Passes
     if (
-      items[i].name != "Aged Brie" &&
-      items[i].name != "Backstage passes to a TAFKAL80ETC concert"
+      goods.name != "Aged Brie" &&
+      goods.name != "Backstage passes to a TAFKAL80ETC concert"
     ) {
-      items[i].quality = decreaseQuality(items[i].quality);
+      goods.quality = decreaseQuality(goods.quality);
     } else {
       //if IS Brie or BS Passes
-      if (items[i].quality < 50) {
-        items[i].quality = items[i].quality + 1;
-        if (items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (items[i].sell_in < 11) {
-            items[i].quality = items[i].quality + 2;
+      if (goods.quality < 50) {
+        goods.quality = goods.quality + 1;
+        if (goods.name == "Backstage passes to a TAFKAL80ETC concert") {
+          if (goods.sell_in < 11) {
+            goods.quality = goods.quality + 2;
           }
         }
       }
     }
     //If sell_in < 0
-    if (items[i].sell_in < 0) {
+    if (goods.sell_in < 0) {
       //If NOT Brie
-      if (items[i].name != "Aged Brie") {
+      if (goods.name != "Aged Brie") {
         //If NOT BS passes
-        if (items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-          items[i].quality = decreaseQuality(items[i].quality);
+        if (goods.name != "Backstage passes to a TAFKAL80ETC concert") {
+          goods.quality = decreaseQuality(goods.quality);
         } else {
           // if IS BS passes
-          items[i].quality = items[i].quality - items[i].quality;
+          goods.quality = goods.quality - goods.quality;
         }
       } else {
         // if IS Brie
-        if (items[i].quality < 50) {
-          items[i].quality = items[i].quality + 1;
+        if (goods.quality < 50) {
+          goods.quality = goods.quality + 1;
         }
       }
     }
@@ -70,7 +71,7 @@ export function updateQuality(items) {
 //    return currentSellIn - 1;
 //   };
 
-//     items[i].sell_in = decreaseSell(items[i].sell_in);
+//     goods.sell_in = decreaseSell(goods.sell_in);
 
 //boolean...isSulphurus: true
 //duplicate code blocks
