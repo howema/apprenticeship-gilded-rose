@@ -26,38 +26,24 @@ export function Item(name, sell_in, quality) {
 
 //  =======================================================================
 
-export function updateQuality(items) {
-  for (let i = 0; i < items.length; i++) {
-    const goods = items[i];
-    if (goods.name === "Sulfuras, Hand of Ragnaros") {
-      continue;
-    }
+export function updateQuality(goods) {
+  goods.forEach((goods) => {
     goods.sell_in -= 1;
+    if (goods.name === "Sulfuras, Hand of Ragnaros") {
+      return goods;
+    }
 
     if (goods.name === "Aged Brie") {
-      handleBrie(goods);
-      continue;
+      return handleBrie(goods);
     }
 
     if (goods.name === "Backstage passes to a TAFKAL80ETC concert") {
-      handlePasses(goods);
-      continue;
+      return handlePasses(goods);
     }
 
     goods.quality = decreaseQuality(goods);
-  }
+  });
 }
-
-const decreaseQuality = (goods) => {
-  if (goods.quality > 0) {
-    if (goods.sell_in < 0) {
-      goods.quality -= 2;
-    } else {
-      goods.quality -= 1;
-    }
-  }
-  return goods.quality;
-};
 
 const handleBrie = (goods) => {
   if (goods.quality < 50) {
@@ -80,4 +66,15 @@ const handlePasses = (goods) => {
       goods.quality -= goods.quality;
     }
   }
+};
+
+const decreaseQuality = (goods) => {
+  if (goods.quality > 0) {
+    if (goods.sell_in < 0) {
+      goods.quality -= 2;
+    } else {
+      goods.quality -= 1;
+    }
+  }
+  return goods.quality;
 };
