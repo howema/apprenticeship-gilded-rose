@@ -39,20 +39,10 @@ export function updateQuality(items) {
       continue;
     }
 
-    // if BS Passes
-
     if (goods.name === "Backstage passes to a TAFKAL80ETC concert") {
-      goods.quality += 1;
-      if (goods.sell_in < 11) {
-        goods.quality += 2;
-      }
-      if (goods.sell_in < 0) {
-        goods.quality -= goods.quality;
-      }
+      handlePasses(goods);
       continue;
     }
-
-    // if NOT Brie or BS Passes
 
     goods.quality = decreaseQuality(goods.quality);
     if (goods.sell_in < 0) {
@@ -76,5 +66,17 @@ const handleBrie = (goods) => {
   }
   if (goods.sell_in < 0 && goods.quality < 50) {
     goods.quality += 1;
+  }
+};
+
+const handlePasses = (goods) => {
+  if (goods.name === "Backstage passes to a TAFKAL80ETC concert") {
+    goods.quality += 1;
+    if (goods.sell_in < 11) {
+      goods.quality += 2;
+    }
+    if (goods.sell_in < 0) {
+      goods.quality -= goods.quality;
+    }
   }
 };
