@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import { Item, updateQuality } from "../inventory/gilded_rose.js";
 
 const getNewItems = () => [

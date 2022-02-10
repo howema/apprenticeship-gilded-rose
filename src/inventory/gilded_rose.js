@@ -41,6 +41,10 @@ export function updateQuality(goods) {
       return handlePasses(goods);
     }
 
+    if (goods.name === "Conjured Mana Cake") {
+      return handleConjured(goods);
+    }
+
     goods.quality = decreaseQuality(goods);
   });
 }
@@ -77,4 +81,10 @@ const decreaseQuality = (goods) => {
     }
   }
   return goods.quality;
+};
+
+const handleConjured = (goods) => {
+  for (let i = 0; i < 2; i++) {
+    decreaseQuality(goods);
+  }
 };
