@@ -34,16 +34,8 @@ export function updateQuality(items) {
     }
     goods.sell_in -= 1;
 
-    //  If Brie
     if (goods.name === "Aged Brie") {
-      if (goods.quality < 50) {
-        goods.quality += 1;
-      } else {
-        goods.quality === 50;
-      }
-      if (goods.sell_in < 0 && goods.quality < 50) {
-        goods.quality += 1;
-      }
+      handleBrie(goods);
       continue;
     }
 
@@ -74,4 +66,15 @@ const decreaseQuality = (currentQuality) => {
     return currentQuality - 1;
   }
   return currentQuality;
+};
+
+const handleBrie = (goods) => {
+  if (goods.quality < 50) {
+    goods.quality += 1;
+  } else {
+    goods.quality === 50;
+  }
+  if (goods.sell_in < 0 && goods.quality < 50) {
+    goods.quality += 1;
+  }
 };
