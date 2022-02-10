@@ -34,13 +34,13 @@ export function updateQuality(items) {
     }
     goods.sell_in -= 1;
 
+    // if goods = Brie
     if (goods.name === "Aged Brie") {
       handleBrie(goods);
       continue;
     }
 
-    // if BS Passes
-
+    // if goods = BS Passes
     if (goods.name === "Backstage passes to a TAFKAL80ETC concert") {
       goods.quality += 1;
       if (goods.sell_in < 11) {
@@ -52,27 +52,24 @@ export function updateQuality(items) {
       continue;
     }
 
-    // if NOT Brie or BS Passes
-
-    goods.quality = decreaseQuality(goods.quality);
-    if (goods.sell_in < 0) {
-      goods.quality = decreaseQuality(goods.quality);
+    // Every day, quality decreases by 1, unless quality is already 0.
+    // If sell_in is less than 0, quality decreases by 2 a day,
+    //  until quality is 0.
+    if (goods.quality > 0) {
+      if (goods.sell_in < 0) {
+        goods.quality -= 2;
+      } else {
+        goods.quality -= 1;
+      }
     }
   }
 }
-
-const decreaseQuality = (currentQuality) => {
-  if (currentQuality > 0) {
-    return currentQuality - 1;
-  }
-  return currentQuality;
-};
 
 const handleBrie = (goods) => {
   if (goods.quality < 50) {
     goods.quality += 1;
   } else {
-    goods.quality === 50;
+    goods.quality = 50;
   }
   if (goods.sell_in < 0 && goods.quality < 50) {
     goods.quality += 1;
