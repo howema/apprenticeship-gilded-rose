@@ -1,4 +1,3 @@
-
 /*
 * Update inventory
 * @param {Item[]} items - an array of Items representing the inventory to be updated
@@ -18,19 +17,16 @@ updateQuality(items);
 
 //  =======================================================================
 
- // Item constructor. DO NOT MODIFY OR THE GOBLIN WILL EAT YOU!
- export function Item(name, sell_in, quality) {
-   this.name = name;
-   this.sell_in = sell_in;
-   this.quality = quality;
- }
+// Item constructor. DO NOT MODIFY OR THE GOBLIN WILL EAT YOU!
+export function Item(name, sell_in, quality) {
+  this.name = name;
+  this.sell_in = sell_in;
+  this.quality = quality;
+}
 
 //  =======================================================================
 
-
 export function updateQuality(items) {
-  // use human words!!
-
   for (let i = 0; i < items.length; i++) {
     const goods = items[i];
     if (goods.name === "Sulfuras, Hand of Ragnaros") {
@@ -38,18 +34,7 @@ export function updateQuality(items) {
     }
     goods.sell_in -= 1;
 
-    // if NOT Brie or BS Passes
-    if (
-      goods.name !== "Aged Brie" &&
-      goods.name !== "Backstage passes to a TAFKAL80ETC concert"
-    ) {
-      goods.quality = decreaseQuality(goods.quality);
-      if (goods.sell_in < 0) {
-        goods.quality = decreaseQuality(goods.quality);
-      }
-    }
-
-    //  If IS Brie
+    //  If Brie
     if (goods.name === "Aged Brie") {
       if (goods.quality < 50) {
         goods.quality += 1;
@@ -59,20 +44,27 @@ export function updateQuality(items) {
       if (goods.sell_in < 0 && goods.quality < 50) {
         goods.quality += 1;
       }
-    } else {
+      continue;
     }
 
-    // if IS BS Passes
-    {
-      if (goods.name === "Backstage passes to a TAFKAL80ETC concert") {
-        goods.quality += 1;
-        if (goods.sell_in < 11) {
-          goods.quality += 2;
-        }
-        if (goods.sell_in < 0) {
-          goods.quality -= goods.quality;
-        }
+    // if BS Passes
+
+    if (goods.name === "Backstage passes to a TAFKAL80ETC concert") {
+      goods.quality += 1;
+      if (goods.sell_in < 11) {
+        goods.quality += 2;
       }
+      if (goods.sell_in < 0) {
+        goods.quality -= goods.quality;
+      }
+      continue;
+    }
+
+    // if NOT Brie or BS Passes
+
+    goods.quality = decreaseQuality(goods.quality);
+    if (goods.sell_in < 0) {
+      goods.quality = decreaseQuality(goods.quality);
     }
   }
 }
