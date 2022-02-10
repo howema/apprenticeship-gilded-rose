@@ -44,18 +44,19 @@ export function updateQuality(items) {
       continue;
     }
 
-    goods.quality = decreaseQuality(goods.quality);
-    if (goods.sell_in < 0) {
-      goods.quality = decreaseQuality(goods.quality);
-    }
+    goods.quality = decreaseQuality(goods);
   }
 }
 
-const decreaseQuality = (currentQuality) => {
-  if (currentQuality > 0) {
-    return currentQuality - 1;
+const decreaseQuality = (goods) => {
+  if (goods.quality > 0) {
+    if (goods.sell_in < 0) {
+      goods.quality -= 2;
+    } else {
+      goods.quality -= 1;
+    }
   }
-  return currentQuality;
+  return goods.quality;
 };
 
 const handleBrie = (goods) => {
