@@ -41,7 +41,7 @@ export function updateQuality(goods) {
       return handlePasses(goods);
     }
 
-    if (goods.name === "Conjured Mana Cake") {
+    if (goods.name.includes("Conjured") === true) {
       return handleConjured(goods);
     }
 
